@@ -7,19 +7,6 @@ type Card struct {
 	Suite
 }
 
-type Cards []Card
-
-func (c Cards) Total() (int, int) {
-	total := 0
-	// TODO: Add counter for alternate value of ace
-
-	for _, card := range c {
-		total += card.Value
-	}
-
-	return total, 0
-}
-
 var (
 	Ace   = Card{Name: "Ace", Value: 11}
 	King  = Card{Name: "King", Value: 10}

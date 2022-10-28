@@ -1,10 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Player struct {
 	Name  string
-	Cards []Card
+	Hands []Hand
 
 	IsDealer bool
 }
@@ -13,6 +15,11 @@ func NewPlayer(name string) Player {
 	return Player{
 		Name:     name,
 		IsDealer: false,
+		Hands: []Hand{
+			{
+				Cards: []Card{},
+			},
+		},
 	}
 }
 
@@ -20,35 +27,27 @@ func NewDealer() Player {
 	return Player{
 		Name:     "Dealer",
 		IsDealer: true,
+		Hands: []Hand{
+			{
+				Cards: []Card{},
+			},
+		},
 	}
-}
-
-func (p Player) Total() (int, int) {
-	low := 0
-	high := 0
-
-	for _, card := range p.Cards {
-		high += card.Value
-		if card.Name == "Ace" {
-			low += 1
-			continue
-		}
-		low += card.Value
-	}
-
-	return low, high
 }
 
 func (p Player) String() string {
-	low, high := p.Total()
-	str := "==================================================\n"
-	str += fmt.Sprintf("Name:\t%s\n", p.Name)
-	str += fmt.Sprintf("Total:\t%d/%d\n", low, high)
-	str += "Cards:\n"
-	for _, card := range p.Cards {
-		str += fmt.Sprintf("\t%s %d %s\n", card.Name, card.Value, card.Suite.Name)
+	var str = ""
+	for _, hand := range p.Hands {
+		low, high := hand.Total()
+		str += "==================================================\n"
+		str += fmt.Sprintf("Name:\t%s\n", p.Name)
+		str += fmt.Sprintf("Total:\t%d/%d\n", low, high)
+		str += "Cards:\n"
+		for _, card := range hand.Cards {
+			str += fmt.Sprintf("\t%s %s\n", card.Suite.Symbol, card.Name)
+		}
+		str += "==================================================\n"
 	}
-	str += "==================================================\n"
 
 	return str
 }

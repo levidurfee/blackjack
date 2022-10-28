@@ -58,6 +58,6 @@ func (d *Deck) Pop() Card {
 	return card
 }
 
-func (d *Deck) Deal(player *Player) {
-	player.Cards = append(player.Cards, d.Pop())
+func (d *Deck) Deal(hand *Hand) {
+	hand.Cards = append(hand.Cards, d.Pop())
 }
