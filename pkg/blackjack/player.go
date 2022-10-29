@@ -47,7 +47,7 @@ func (p Player) String() string {
 		str += fmt.Sprintf("Total:\t%d\n", hand.Total())
 		str += "Cards:\n"
 		for _, card := range hand.Cards {
-			str += fmt.Sprintf("\t%s %s\n", card.Suite.Symbol, card.Name)
+			str += fmt.Sprintf("\t%s %s\n", card.Suit.Symbol, card.Name)
 		}
 		str += "==================================================\n"
 	}

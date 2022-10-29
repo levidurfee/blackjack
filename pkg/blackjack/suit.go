@@ -14,21 +14,21 @@ const (
 	SpadesSymbol   = "♠"
 )
 
-type Suite struct {
+type Suit struct {
 	Name   string
 	Symbol string
 }
 
-type Suites []Suite
+type Suits []Suit
 
 var (
-	Clubs    = Suite{Name: ClubsName, Symbol: ClubsSymbol}
-	Diamonds = Suite{Name: DiamondsName, Symbol: DiamondsSymbol}
-	Hearts   = Suite{Name: HeartsName, Symbol: HeartsSymbol}
-	Spades   = Suite{Name: SpadesName, Symbol: SpadesSymbol}
+	Clubs    = Suit{Name: ClubsName, Symbol: ClubsSymbol}
+	Diamonds = Suit{Name: DiamondsName, Symbol: DiamondsSymbol}
+	Hearts   = Suit{Name: HeartsName, Symbol: HeartsSymbol}
+	Spades   = Suit{Name: SpadesName, Symbol: SpadesSymbol}
 )
 
-var SuitesSlice = Suites{
+var SuitsSlice = Suits{
 	Clubs,
 	Diamonds,
 	Hearts,

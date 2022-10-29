@@ -24,8 +24,8 @@ func NewDeck() Deck {
 	deck := Deck{}
 
 	for _, card := range CardsSlice {
-		for _, suite := range SuitesSlice {
-			card.Suite = suite
+		for _, suit := range SuitsSlice {
+			card.Suit = suit
 			deck.Cards = append(deck.Cards, card)
 		}
 	}

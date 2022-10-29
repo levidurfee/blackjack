@@ -4,7 +4,7 @@ type Card struct {
 	Name  string
 	Value int
 
-	Suite
+	Suit
 }
 
 const (
