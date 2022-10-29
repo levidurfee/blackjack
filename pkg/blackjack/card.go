@@ -1,11 +1,6 @@
 package blackjack
 
-type Card struct {
-	Name  string
-	Value int
-
-	Suit
-}
+import "fmt"
 
 const (
 	AceName   = "Ace"
@@ -38,6 +33,13 @@ const (
 	TwoValue    = 2
 )
 
+type Card struct {
+	Name  string
+	Value int
+
+	Suit
+}
+
 var (
 	Ace   = Card{Name: AceName, Value: AceValue}
 	King  = Card{Name: KingName, Value: FaceValue}
@@ -68,4 +70,8 @@ var CardsSlice = []Card{
 	Four,
 	Three,
 	Two,
+}
+
+func (c Card) String() string {
+	return fmt.Sprintf("%s %s", c.Suit.Symbol, c.Name)
 }
