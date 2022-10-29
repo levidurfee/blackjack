@@ -10,16 +10,7 @@ const (
 )
 
 func (h Hand) Total() int {
-	total := 0
-
-	for _, card := range h.Cards {
-		value := card.Value
-		if card.Name == AceName {
-			value = AceLowValue
-		}
-
-		total += value
-	}
+	total := h.SoftTotal()
 
 	if total+10 <= MaxTotal && h.NumberOfAces() > 0 {
 		// Only one ace can have the value of 11 if one hand, if two aces were
