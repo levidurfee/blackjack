@@ -7,6 +7,7 @@ type Hand struct {
 const (
 	AceCardName = "Ace"
 	AceLowValue = 1
+	MaxTotal    = 21
 )
 
 func (h Hand) Total() (int, int) {
@@ -23,4 +24,14 @@ func (h Hand) Total() (int, int) {
 	}
 
 	return low, high
+}
+
+// Bust checks if the hand has exceeded the max total allowed.
+//
+// It only checks the low value, since the low value will always be equal to or
+// less than the high value.
+func (h Hand) Bust() bool {
+	low, _ := h.Total()
+
+	return low > MaxTotal
 }

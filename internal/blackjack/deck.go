@@ -6,6 +6,10 @@ import (
 	"time"
 )
 
+const (
+	MinCardsToPlay = 4
+)
+
 type Deck struct {
 	Cards []Card
 }
@@ -60,4 +64,8 @@ func (d *Deck) Pop() Card {
 
 func (d *Deck) Deal(hand *Hand) {
 	hand.Cards = append(hand.Cards, d.Pop())
+}
+
+func (d Deck) HasEnoughCards() bool {
+	return len(d.Cards) > MinCardsToPlay
 }

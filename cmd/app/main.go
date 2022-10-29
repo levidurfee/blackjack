@@ -12,11 +12,27 @@ const (
 	DefaultHandIndex = 0
 )
 
+const (
+	PromptQuestion = "What would you like to do?"
+	PromptOptions  = "(h)it (s)stand (q)uit"
+	HasBustText    = "has bust!"
+)
+
+const (
+	HitChar   = "h"
+	StandChar = "s"
+	QuitChar  = "q"
+)
+
 func main() {
 	fmt.Printf("Blackjack v(%s) b(%s)\n\n", version.Version, version.Build)
 
 	var numberOfDecks int
-	flag.IntVar(&numberOfDecks, "decks", 1, "Specify the number of decks")
+	flag.IntVar(&numberOfDecks, "decks", 4, "Specify the number of decks")
+
+	var playerName string
+	flag.StringVar(&playerName, "name", "Player 1", "Player name")
+
 	flag.Parse()
 
 	fmt.Printf("Using %d decks\n", numberOfDecks)
@@ -25,12 +41,12 @@ func main() {
 
 	for {
 		fmt.Printf("%d cards left\n", len(decks.Cards))
-		if len(decks.Cards) < 4 {
+		if !decks.HasEnoughCards() {
 			return
 		}
 
 		dealer := blackjack.NewDealer()
-		player := blackjack.NewPlayer("Levi")
+		player := blackjack.NewPlayer(playerName)
 
 		decks.Deal(&player.Hands[DefaultHandIndex])
 		decks.Deal(&dealer.Hands[DefaultHandIndex])
@@ -39,20 +55,30 @@ func main() {
 
 		var cmd string
 		for {
+			if dealer.Hands[DefaultHandIndex].Bust() {
+				fmt.Println(dealer.Name, HasBustText)
+				break
+			}
+
+			if player.Hands[DefaultHandIndex].Bust() {
+				fmt.Println(player.Name, HasBustText)
+				break
+			}
+
 			fmt.Println(dealer)
 			fmt.Println(player)
 
-			fmt.Println("What would you like to do?")
-			fmt.Println("(h)it (s)stand (q)uit")
+			fmt.Println(PromptQuestion)
+			fmt.Println(PromptOptions)
 			fmt.Scanln(&cmd)
 
 			switch cmd {
-			case "h":
-				decks.Deal(&player.Hands[0])
-			case "q":
+			case HitChar:
+				decks.Deal(&player.Hands[DefaultHandIndex])
+			case QuitChar:
 				return
 			}
-			if cmd == "s" {
+			if cmd == StandChar {
 				break
 			}
 		}
