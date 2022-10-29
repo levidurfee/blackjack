@@ -52,9 +52,7 @@ func (h Hand) DealerTotal() int {
 // It only checks the low value, since the low value will always be equal to or
 // less than the high value.
 func (h Hand) Bust() bool {
-	low, _ := h.Total()
-
-	return low > MaxTotal
+	return h.Total() > MaxTotal
 }
 
 // IsHard will return true if the hand does not have an Ace.
