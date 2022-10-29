@@ -5,22 +5,26 @@ type Hand struct {
 }
 
 const (
-	AceLowValue = 1
-	MaxTotal    = 21
+	MaxTotal           = 21
+	AceValueDifference = AceValue - AceLowValue
 )
 
+// Total calculates the total score of the hand. If an ace can be worth 11, then
+// it will calculate the total with at most one ace as an 11. So, if the other
+// cards only add up to 10 or less, then it'll allow an ace to be worth 11.
 func (h Hand) Total() int {
 	total := h.SoftTotal()
 
-	if total+10 <= MaxTotal && h.NumberOfAces() > 0 {
-		// Only one ace can have the value of 11 if one hand, if two aces were
+	if total+AceValueDifference <= MaxTotal && h.HasAces() {
+		// Only one ace can have the value of 11 in one hand, if two aces were
 		// 11, then you'd bust with at least 22.
-		total += 10
+		total += AceValueDifference
 	}
 
 	return total
 }
 
+// NumberOfAces counts the number of aces in the hand.
 func (h Hand) NumberOfAces() int {
 	ctr := 0
 
@@ -34,11 +38,26 @@ func (h Hand) NumberOfAces() int {
 	return ctr
 }
 
+// HasAces uses NumberOfAces to determine if there are any aces in the hand.
+//
+// We could iterate over the cards and return early if an ace is found, but
+// since we already have the `NumberOfAces` method, we might as well use it.
+// Otherwise we'd duplicate a lot of the code with not much benefit. When
+// iterating over every card in the hand, it'll never be more than 22 cards.
+// If someone had 22 aces, then they'd bust and they couldn't get anymore
+// cards in their hand.
+func (h Hand) HasAces() bool {
+	return h.NumberOfAces() > 0
+}
+
+// DealerTotal returns the total for the dealer. We only return the value for
+// the first card, since the other cards aren't revealed until it is no longer
+// the player's turn.
 func (h Hand) DealerTotal() int {
 	return h.Cards[0].Value
 }
 
-// Bust checks if the hand has exceeded the max total allowed.
+// Bust checks if the hand has exceeded the max total allowed, `MaxTotal`, 21.
 //
 // It only checks the low value, since the low value will always be equal to or
 // less than the high value.
@@ -52,7 +71,7 @@ func (h Hand) IsHard() bool {
 		return true
 	}
 
-	return MaxTotal-h.SoftTotal() < 10
+	return MaxTotal-h.SoftTotal() < AceValueDifference
 }
 
 // IsPair will return true if both of the first two cards are the same.

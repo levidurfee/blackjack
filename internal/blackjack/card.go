@@ -24,17 +24,18 @@ const (
 )
 
 const (
-	AceValue   = 11
-	FaceValue  = 10
-	TenValue   = 10
-	NineValue  = 9
-	EightValue = 8
-	SevenValue = 7
-	SixValue   = 6
-	FiveValue  = 5
-	FourValue  = 4
-	ThreeValue = 3
-	TwoValue   = 2
+	AceValue    = 11
+	AceLowValue = 1
+	FaceValue   = 10
+	TenValue    = 10
+	NineValue   = 9
+	EightValue  = 8
+	SevenValue  = 7
+	SixValue    = 6
+	FiveValue   = 5
+	FourValue   = 4
+	ThreeValue  = 3
+	TwoValue    = 2
 )
 
 var (
