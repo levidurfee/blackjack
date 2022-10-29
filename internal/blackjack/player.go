@@ -38,14 +38,13 @@ func NewDealer() Player {
 func (p Player) String() string {
 	var str = ""
 	for _, hand := range p.Hands {
-		low, high := hand.Total()
 		str += "==================================================\n"
 		str += fmt.Sprintf("Name:\t%s\n", p.Name)
 		if p.IsDealer {
 			str += fmt.Sprintf("Total:\t%d\n", hand.DealerTotal())
 			continue
 		}
-		str += fmt.Sprintf("Total:\t%d/%d\n", low, high)
+		str += fmt.Sprintf("Total:\t%d\n", hand.Total())
 		str += "Cards:\n"
 		for _, card := range hand.Cards {
 			str += fmt.Sprintf("\t%s %s\n", card.Suite.Symbol, card.Name)
