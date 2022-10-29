@@ -39,3 +39,23 @@ func (h Hand) Bust() bool {
 
 	return low > MaxTotal
 }
+
+// IsHard will return true if the hand does not have an Ace.
+func (h Hand) IsHard() bool {
+	for _, card := range h.Cards {
+		if card.Name == AceCardName {
+			return false
+		}
+	}
+
+	return true
+}
+
+// IsPair will return true if both of the first two cards are the same.
+func (h Hand) IsPair() bool {
+	if len(h.Cards) > 2 {
+		return false
+	}
+
+	return h.Cards[0].Name == h.Cards[1].Name
+}
