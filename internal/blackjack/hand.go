@@ -74,3 +74,20 @@ func (h Hand) IsPair() bool {
 
 	return h.Cards[0].Name == h.Cards[1].Name
 }
+
+// SoftTotal uses the low value of aces (1) instead of the high value (11) to
+// calculate the total of the hand.
+func (h Hand) SoftTotal() int {
+	total := 0
+
+	for _, card := range h.Cards {
+		value := card.Value
+		if card.Name == AceName {
+			value = AceLowValue
+		}
+
+		total += value
+	}
+
+	return total
+}
