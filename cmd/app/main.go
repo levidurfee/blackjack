@@ -16,6 +16,7 @@ const (
 	PromptQuestion = "What would you like to do?"
 	PromptOptions  = "(h)it (s)stand (q)uit"
 	HasBustText    = "has bust!"
+	AnyKeyText     = "Hit any key to continue..."
 )
 
 const (
@@ -41,7 +42,7 @@ func main() {
 	flag.Parse()
 
 	fmt.Printf("Using %d decks\n", numberOfDecks)
-	fmt.Println("Hit any key to continue...")
+	fmt.Println(AnyKeyText)
 
 	decks := blackjack.NewDecks(numberOfDecks)
 	fmt.Scanln()
@@ -64,18 +65,22 @@ func main() {
 			fmt.Print(AnsiClearScreen)
 			fmt.Printf("%d cards left\n", len(decks.Cards))
 
+			fmt.Println(dealer)
+			fmt.Println(player)
+
 			if dealer.Hands[DefaultHandIndex].Bust() {
 				fmt.Println(dealer.Name, HasBustText)
+				fmt.Println(AnyKeyText)
+				fmt.Scanln()
 				break
 			}
 
 			if player.Hands[DefaultHandIndex].Bust() {
 				fmt.Println(player.Name, HasBustText)
+				fmt.Println(AnyKeyText)
+				fmt.Scanln()
 				break
 			}
-
-			fmt.Println(dealer)
-			fmt.Println(player)
 
 			fmt.Println(PromptQuestion)
 			fmt.Println(PromptOptions)
