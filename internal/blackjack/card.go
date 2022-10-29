@@ -7,20 +7,50 @@ type Card struct {
 	Suite
 }
 
+const (
+	AceName   = "Ace"
+	KingName  = "King"
+	QueenName = "Queen"
+	JackName  = "Jack"
+	TenName   = "Ten"
+	NineName  = "Nine"
+	EightName = "Eight"
+	SevenName = "Seven"
+	SixName   = "Six"
+	FiveName  = "Five"
+	FourName  = "Four"
+	ThreeName = "Three"
+	TwoName   = "Two"
+)
+
+const (
+	AceValue   = 11
+	FaceValue  = 10
+	TenValue   = 10
+	NineValue  = 9
+	EightValue = 8
+	SevenValue = 7
+	SixValue   = 6
+	FiveValue  = 5
+	FourValue  = 4
+	ThreeValue = 3
+	TwoValue   = 2
+)
+
 var (
-	Ace   = Card{Name: "Ace", Value: 11}
-	King  = Card{Name: "King", Value: 10}
-	Queen = Card{Name: "Queen", Value: 10}
-	Jack  = Card{Name: "Jack", Value: 10}
-	Ten   = Card{Name: "Ten", Value: 10}
-	Nine  = Card{Name: "Nine", Value: 9}
-	Eight = Card{Name: "Eight", Value: 8}
-	Seven = Card{Name: "Seven", Value: 7}
-	Six   = Card{Name: "Six", Value: 6}
-	Five  = Card{Name: "Five", Value: 5}
-	Four  = Card{Name: "Four", Value: 4}
-	Three = Card{Name: "Three", Value: 3}
-	Two   = Card{Name: "Two", Value: 2}
+	Ace   = Card{Name: AceName, Value: AceValue}
+	King  = Card{Name: KingName, Value: FaceValue}
+	Queen = Card{Name: QueenName, Value: FaceValue}
+	Jack  = Card{Name: JackName, Value: FaceValue}
+	Ten   = Card{Name: TenName, Value: TenValue}
+	Nine  = Card{Name: NineName, Value: NineValue}
+	Eight = Card{Name: EightName, Value: EightValue}
+	Seven = Card{Name: SevenName, Value: SevenValue}
+	Six   = Card{Name: SixName, Value: SixValue}
+	Five  = Card{Name: FiveName, Value: FiveValue}
+	Four  = Card{Name: FourName, Value: FourValue}
+	Three = Card{Name: ThreeName, Value: ThreeValue}
+	Two   = Card{Name: TwoName, Value: TwoValue}
 )
 
 var CardsSlice = []Card{
