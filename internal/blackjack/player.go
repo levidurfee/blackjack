@@ -41,6 +41,10 @@ func (p Player) String() string {
 		low, high := hand.Total()
 		str += "==================================================\n"
 		str += fmt.Sprintf("Name:\t%s\n", p.Name)
+		if p.IsDealer {
+			str += fmt.Sprintf("Total:\t%d\n", hand.DealerTotal())
+			continue
+		}
 		str += fmt.Sprintf("Total:\t%d/%d\n", low, high)
 		str += "Cards:\n"
 		for _, card := range hand.Cards {

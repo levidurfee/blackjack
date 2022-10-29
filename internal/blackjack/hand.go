@@ -26,6 +26,10 @@ func (h Hand) Total() (int, int) {
 	return low, high
 }
 
+func (h Hand) DealerTotal() int {
+	return h.Cards[0].Value
+}
+
 // Bust checks if the hand has exceeded the max total allowed.
 //
 // It only checks the low value, since the low value will always be equal to or

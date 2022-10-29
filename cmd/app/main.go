@@ -24,7 +24,12 @@ const (
 	QuitChar  = "q"
 )
 
+const (
+	AnsiClearScreen = "\033[H\033[2J"
+)
+
 func main() {
+	fmt.Print(AnsiClearScreen)
 	fmt.Printf("Blackjack v(%s) b(%s)\n\n", version.Version, version.Build)
 
 	var numberOfDecks int
@@ -36,11 +41,12 @@ func main() {
 	flag.Parse()
 
 	fmt.Printf("Using %d decks\n", numberOfDecks)
+	fmt.Println("Hit any key to continue...")
 
 	decks := blackjack.NewDecks(numberOfDecks)
+	fmt.Scanln()
 
 	for {
-		fmt.Printf("%d cards left\n", len(decks.Cards))
 		if !decks.HasEnoughCards() {
 			return
 		}
@@ -55,6 +61,9 @@ func main() {
 
 		var cmd string
 		for {
+			fmt.Print(AnsiClearScreen)
+			fmt.Printf("%d cards left\n", len(decks.Cards))
+
 			if dealer.Hands[DefaultHandIndex].Bust() {
 				fmt.Println(dealer.Name, HasBustText)
 				break
