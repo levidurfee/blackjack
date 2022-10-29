@@ -4,8 +4,8 @@ import (
 	"flag"
 	"fmt"
 
-	"git.x6c.co/go/blackjack/internal/blackjack"
-	"git.x6c.co/go/blackjack/internal/version"
+	"git.x6c.co/go/blackjack/pkg/blackjack"
+	"git.x6c.co/go/blackjack/pkg/version"
 )
 
 const (
