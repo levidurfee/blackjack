@@ -1,4 +1,4 @@
-package main
+package blackjack
 
 type Suite struct {
 	Name   string

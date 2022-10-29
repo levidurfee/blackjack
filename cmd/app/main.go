@@ -3,6 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+
+	"git.x6c.co/go/blackjack/internal/blackjack"
+	"git.x6c.co/go/blackjack/internal/version"
 )
 
 const (
@@ -10,7 +13,7 @@ const (
 )
 
 func main() {
-	fmt.Printf("Blackjack v(%s) b(%s)\n\n", Version, Build)
+	fmt.Printf("Blackjack v(%s) b(%s)\n\n", version.Version, version.Build)
 
 	var numberOfDecks int
 	flag.IntVar(&numberOfDecks, "decks", 1, "Specify the number of decks")
@@ -18,7 +21,7 @@ func main() {
 
 	fmt.Printf("Using %d decks\n", numberOfDecks)
 
-	decks := NewDecks(numberOfDecks)
+	decks := blackjack.NewDecks(numberOfDecks)
 
 	for {
 		fmt.Printf("%d cards left\n", len(decks.Cards))
@@ -26,8 +29,8 @@ func main() {
 			return
 		}
 
-		dealer := NewDealer()
-		player := NewPlayer("Levi")
+		dealer := blackjack.NewDealer()
+		player := blackjack.NewPlayer("Levi")
 
 		decks.Deal(&player.Hands[DefaultHandIndex])
 		decks.Deal(&dealer.Hands[DefaultHandIndex])
