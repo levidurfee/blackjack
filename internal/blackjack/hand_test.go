@@ -77,3 +77,27 @@ func TestHandBust(t *testing.T) {
 		t.Fatalf("got %t, wanted %t\n", got, want)
 	}
 }
+
+func TestHandIsHard(t *testing.T) {
+	hand := Hand{
+		Cards: []Card{
+			Ace, // 1
+			Ace, // 2
+			Ace, // 3
+			Ace, // 4
+			Ace, // 5
+			Ace, // 6
+			Ace, // 7
+			Ace, // 8
+			Two, // 10
+			Two, // 12
+		},
+	}
+
+	var want = true
+	var got = hand.IsHard()
+
+	if want != got {
+		t.Fatalf("got %t, wanted %t\n", got, want)
+	}
+}
