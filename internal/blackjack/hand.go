@@ -48,13 +48,11 @@ func (h Hand) Bust() bool {
 
 // IsHard will return true if the hand does not have an Ace.
 func (h Hand) IsHard() bool {
-	for _, card := range h.Cards {
-		if card.Name == AceCardName {
-			return false
-		}
+	if h.NumberOfAces() == 0 {
+		return true
 	}
 
-	return true
+	return MaxTotal-h.SoftTotal() < 10
 }
 
 // IsPair will return true if both of the first two cards are the same.
