@@ -5,25 +5,42 @@ type Hand struct {
 }
 
 const (
-	AceCardName = "Ace"
 	AceLowValue = 1
 	MaxTotal    = 21
 )
 
-func (h Hand) Total() (int, int) {
-	low := 0
-	high := 0
+func (h Hand) Total() int {
+	total := 0
 
 	for _, card := range h.Cards {
-		high += card.Value
-		if card.Name == AceCardName {
-			low += AceLowValue
-			continue
+		value := card.Value
+		if card.Name == AceName {
+			value = AceLowValue
 		}
-		low += card.Value
+
+		total += value
 	}
 
-	return low, high
+	if total+10 <= MaxTotal && h.NumberOfAces() > 0 {
+		// Only one ace can have the value of 11 if one hand, if two aces were
+		// 11, then you'd bust with at least 22.
+		total += 10
+	}
+
+	return total
+}
+
+func (h Hand) NumberOfAces() int {
+	ctr := 0
+
+	for _, card := range h.Cards {
+		if card.Name != AceName {
+			continue
+		}
+		ctr++
+	}
+
+	return ctr
 }
 
 func (h Hand) DealerTotal() int {
