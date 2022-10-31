@@ -65,7 +65,17 @@ func (h Hand) Bust() bool {
 	return h.Total() > MaxTotal
 }
 
-// IsHard will return true if the hand does not have an Ace.
+// IsHard will return `true` if the hand is hard and `soft` if the hand is soft.
+//
+// A hand is considered soft if it has an ace that can be counted as an 11. If a
+// hand does not have any aces, then it is hard. Otherwise, we get the total of
+// the hand using the 1 for the value of the ace(s); if 21 minus the soft total
+// is less than 10, then we know one of the aces can be counted as 11.
+//
+//	21 - SoftTotal < 10
+//
+//	21 - 10 = 11 // This would be a soft hand.
+//	21 - 12 = 9  // This would be a hard hand.
 func (h Hand) IsHard() bool {
 	if h.NumberOfAces() == 0 {
 		return true
