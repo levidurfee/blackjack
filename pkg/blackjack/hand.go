@@ -113,3 +113,7 @@ func (h Hand) SoftTotal() int {
 
 	return total
 }
+
+func (h Hand) IsBlackjack() bool {
+	return h.Total() == MaxTotal
+}

@@ -101,3 +101,33 @@ func TestHandIsHard(t *testing.T) {
 		t.Fatalf("got %t, wanted %t\n", got, want)
 	}
 }
+
+func TestHandIsBlackjack(t *testing.T) {
+	hand := Hand{
+		Cards: []Card{
+			King, // 10
+			Ace,  // 21
+		},
+	}
+
+	var want = true
+	var got = hand.IsBlackjack()
+
+	if want != got {
+		t.Fatalf("got %t, wanted %t\n", got, want)
+	}
+
+	hand = Hand{
+		Cards: []Card{
+			King, // 10
+			Ten,  // 20
+		},
+	}
+
+	want = false
+	got = hand.IsBlackjack()
+
+	if want != got {
+		t.Fatalf("got %t, wanted %t\n", got, want)
+	}
+}
