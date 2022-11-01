@@ -5,6 +5,7 @@ type Hand struct {
 }
 
 const (
+	DefaultHandIndex   = 0
 	MaxTotal           = 21
 	AceValueDifference = AceValue - AceLowValue
 )
@@ -54,11 +55,11 @@ func (h Hand) HasAces() bool {
 // the first card, since the other cards aren't revealed until it is no longer
 // the player's turn.
 func (h Hand) DealerTotal() int {
-	return h.Cards[0].Value
+	return h.Cards[DefaultHandIndex].Value
 }
 
 func (h Hand) DealerUpCard() string {
-	return h.Cards[0].Name
+	return h.Cards[DefaultHandIndex].Name
 }
 
 // Bust checks if the hand has exceeded the max total allowed, `MaxTotal`, 21.
@@ -94,7 +95,7 @@ func (h Hand) IsPair() bool {
 		return false
 	}
 
-	return h.Cards[0].Name == h.Cards[1].Name
+	return h.Cards[DefaultHandIndex].Name == h.Cards[1].Name
 }
 
 // SoftTotal uses the low value of aces (1) instead of the high value (11) to
@@ -116,4 +117,8 @@ func (h Hand) SoftTotal() int {
 
 func (h Hand) IsBlackjack() bool {
 	return h.Total() == MaxTotal
+}
+
+func (h *Hand) Empty() {
+	h.Cards = nil
 }

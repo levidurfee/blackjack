@@ -131,3 +131,27 @@ func TestHandIsBlackjack(t *testing.T) {
 		t.Fatalf("got %t, wanted %t\n", got, want)
 	}
 }
+
+func TestHandEmpty(t *testing.T) {
+	hand := Hand{
+		Cards: []Card{
+			King, // 10
+			Ace,  // 21
+		},
+	}
+
+	want := 2
+	got := len(hand.Cards)
+
+	if want != got {
+		t.Fatalf("got %d, wanted %d\n", got, want)
+	}
+
+	hand.Empty()
+	want = 0
+	got = len(hand.Cards)
+
+	if want != got {
+		t.Fatalf("got %d, wanted %d\n", got, want)
+	}
+}
