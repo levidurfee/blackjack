@@ -7,6 +7,7 @@ import (
 type Player struct {
 	Name  string
 	Hands []Hand
+	Score int
 
 	IsDealer bool
 }
@@ -20,6 +21,7 @@ func NewPlayer(name string) Player {
 				Cards: []Card{},
 			},
 		},
+		Score: 0,
 	}
 }
 
@@ -32,6 +34,7 @@ func NewDealer() Player {
 				Cards: []Card{},
 			},
 		},
+		Score: 0,
 	}
 }
 
@@ -40,6 +43,7 @@ func (p Player) String() string {
 	for _, hand := range p.Hands {
 		str += "==================================================\n"
 		str += fmt.Sprintf("Name:\t%s\n", p.Name)
+		str += fmt.Sprintf("Score:\t%d\n", p.Score)
 		if p.IsDealer {
 			str += fmt.Sprintf("Total:\t%d\n", hand.DealerTotal())
 			str += fmt.Sprintf("Up:\t%s\n", hand.DealerUpCard())
