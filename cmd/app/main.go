@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"git.x6c.co/go/blackjack/pkg/blackjack"
+	"git.x6c.co/go/blackjack/pkg/strategy"
 	"git.x6c.co/go/blackjack/pkg/version"
 )
 
@@ -80,6 +81,13 @@ func main() {
 				fmt.Println(AnyKeyText)
 				fmt.Scanln()
 				break
+			}
+
+			if player.Hands[DefaultHandIndex].IsHard() {
+				fmt.Println("Hard hand")
+				total := player.Hands[DefaultHandIndex].Total()
+				dealerCard := dealer.Hands[DefaultHandIndex].Cards[0].Name
+				fmt.Println(strategy.Hard.Get(total, dealerCard))
 			}
 
 			fmt.Println(PromptQuestion)
