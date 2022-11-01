@@ -8,3 +8,7 @@ import "git.x6c.co/go/blackjack/pkg/blackjack"
 //
 // There are different strategies based on what type of hand the player has.
 type StrategyTable map[int]map[string]blackjack.Action
+
+func (s StrategyTable) Get(playerTotal int, dealerCard string) blackjack.Action {
+	return s[playerTotal][dealerCard]
+}
