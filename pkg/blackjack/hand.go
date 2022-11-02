@@ -122,3 +122,15 @@ func (h Hand) IsBlackjack() bool {
 func (h *Hand) Empty() {
 	h.Cards = nil
 }
+
+func (h Hand) Type() HandType {
+	if h.IsPair() {
+		return PairHand
+	}
+	if h.IsHard() {
+		return HardHand
+	}
+
+	return SoftHand
+}
+
