@@ -1,6 +1,8 @@
 package strategy
 
-import "git.x6c.co/go/blackjack/pkg/blackjack"
+import (
+	"git.x6c.co/go/blackjack/pkg/blackjack"
+)
 
 // StrategyTable is a map of the suggested actions based on the player's hand
 // and the dealer's up-card. We use the total of the player's hand as an int,
@@ -11,4 +13,21 @@ type StrategyTable map[int]map[string]blackjack.Action
 
 func (s StrategyTable) Get(playerTotal int, dealerCard string) blackjack.Action {
 	return s[playerTotal][dealerCard]
+}
+
+func Evaluate(hand blackjack.Hand, dealerCard string) blackjack.Action {
+	if hand.IsBlackjack() {
+		return blackjack.Stand
+	}
+
+	switch hand.Type() {
+	case blackjack.PairHand:
+		// Lookup strategy for pairs
+	case blackjack.HardHand:
+		return Hard.Get(hand.Total(), dealerCard)
+	case blackjack.SoftHand:
+		// return
+	}
+
+	return blackjack.Stand
 }
