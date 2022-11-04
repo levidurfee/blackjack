@@ -42,11 +42,12 @@ func printPlayers() {
 func Run() {
 	var cmd string
 	for {
-		deal()
-		printPlayers()
 		if !deck.HasEnoughCards() {
 			return
 		}
+
+		deal()
+		printPlayers()
 
 	actionloop:
 		for {
