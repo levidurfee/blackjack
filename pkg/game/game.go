@@ -15,7 +15,7 @@ const (
 var (
 	dealer = blackjack.NewDealer()
 	player = blackjack.NewPlayer("Levi")
-	deck   = blackjack.NewDecks(4)
+	deck   = blackjack.NewDecks(8)
 )
 
 func clear() {
@@ -40,7 +40,7 @@ func printPlayers() {
 }
 
 func Run() {
-	var cmd string
+	// var cmd string
 	for {
 		if !deck.HasEnoughCards() {
 			return
@@ -60,6 +60,8 @@ func Run() {
 			}
 			action := strategy.Evaluate(player.Hands[handIndex], dealer.Hands[handIndex].DealerUpCard())
 
+			fmt.Println(player.Hands[handIndex].Type(), action)
+
 			switch action {
 			case blackjack.Stand:
 				break actionloop
@@ -78,6 +80,8 @@ func Run() {
 				break
 			}
 
+			fmt.Println("Dealing dealer card")
+
 			deck.Deal(&dealer.Hands[handIndex])
 		}
 
@@ -86,10 +90,10 @@ func Run() {
 			fmt.Printf("%s won this hand with %d\n", winner.Name, winner.Hands[handIndex].Total())
 		}
 
-		fmt.Println("Another hand? y/n")
-		fmt.Scanln(&cmd)
-		if cmd == "n" {
-			break
-		}
+		// fmt.Println("Another hand? y/n")
+		// fmt.Scanln(&cmd)
+		// if cmd == "n" {
+		// 	break
+		// }
 	}
 }
