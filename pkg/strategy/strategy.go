@@ -22,7 +22,7 @@ func Evaluate(hand blackjack.Hand, dealerCard string) blackjack.Action {
 
 	switch hand.Type() {
 	case blackjack.PairHand:
-		// Lookup strategy for pairs
+		return Pair.Get(hand.Total(), dealerCard)
 	case blackjack.HardHand:
 		return Hard.Get(hand.Total(), dealerCard)
 	case blackjack.SoftHand:
