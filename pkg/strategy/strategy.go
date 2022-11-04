@@ -22,13 +22,13 @@ func Evaluate(hand blackjack.Hand, dealerCard string) blackjack.Action {
 
 	switch hand.Type() {
 	case blackjack.PairHand:
-		return Pair.Get(hand.Total(), dealerCard)
-	case blackjack.HardHand:
-		return Hard.Get(hand.Total(), dealerCard)
-	case blackjack.SoftHand:
 		// TODO: implement split action
 		// For now use the hard hand strategy
 		return Hard.Get(hand.Total(), dealerCard)
+	case blackjack.HardHand:
+		return Hard.Get(hand.Total(), dealerCard)
+	case blackjack.SoftHand:
+		return Soft.Get(hand.Total(), dealerCard)
 	}
 
 	return blackjack.Stand
