@@ -1,6 +1,7 @@
 package game
 
 import (
+	"errors"
 	"fmt"
 
 	"git.x6c.co/go/blackjack/pkg/blackjack"
@@ -40,7 +41,6 @@ func printPlayers() {
 }
 
 func Run() {
-	// var cmd string
 	for {
 		if !deck.HasEnoughCards() {
 			return
@@ -60,15 +60,19 @@ func Run() {
 			}
 			action := strategy.Evaluate(player.Hands[handIndex], dealer.Hands[handIndex].DealerUpCard())
 
-			fmt.Println(player.Hands[handIndex].Type(), action)
-
 			switch action {
 			case blackjack.Stand:
 				break actionloop
 			case blackjack.Hit:
-				deck.Deal(&player.Hands[handIndex])
+				_, err := deck.Deal(&player.Hands[handIndex])
+				if errors.Is(err, blackjack.ErrOutOfCards) {
+					panic(err.Error())
+				}
 			case blackjack.Double:
-				deck.Deal(&player.Hands[handIndex])
+				_, err := deck.Deal(&player.Hands[handIndex])
+				if errors.Is(err, blackjack.ErrOutOfCards) {
+					panic(err.Error())
+				}
 			case blackjack.Split:
 				// TODO: implement split action
 			}
@@ -76,24 +80,19 @@ func Run() {
 
 		for {
 			printPlayers()
-			if dealer.Hands[handIndex].Total() >= 17 {
+			if dealer.Hands[handIndex].Total() >= strategy.DealerStand {
 				break
 			}
 
-			fmt.Println("Dealing dealer card")
-
-			deck.Deal(&dealer.Hands[handIndex])
+			_, err := deck.Deal(&dealer.Hands[handIndex])
+			if errors.Is(err, blackjack.ErrOutOfCards) {
+				panic(err.Error())
+			}
 		}
 
 		winner := score(&player, &dealer)
 		if winner != nil {
 			fmt.Printf("%s won this hand with %d\n", winner.Name, winner.Hands[handIndex].Total())
 		}
-
-		// fmt.Println("Another hand? y/n")
-		// fmt.Scanln(&cmd)
-		// if cmd == "n" {
-		// 	break
-		// }
 	}
 }

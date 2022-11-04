@@ -1,9 +1,14 @@
 package blackjack
 
 import (
+	"errors"
 	"math/rand"
 	"sort"
 	"time"
+)
+
+var (
+	ErrOutOfCards = errors.New("out of cards")
 )
 
 const (
@@ -62,8 +67,14 @@ func (d *Deck) Pop() Card {
 	return card
 }
 
-func (d *Deck) Deal(hand *Hand) {
+func (d *Deck) Deal(hand *Hand) (int, error) {
+	if len(d.Cards) <= 0 {
+		return 0, ErrOutOfCards
+	}
+
 	hand.Cards = append(hand.Cards, d.Pop())
+
+	return len(d.Cards), nil
 }
 
 func (d Deck) HasEnoughCards() bool {
