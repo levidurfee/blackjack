@@ -26,7 +26,7 @@ func Evaluate(hand blackjack.Hand, dealerCard string) blackjack.Action {
 	case blackjack.HardHand:
 		return Hard.Get(hand.Total(), dealerCard)
 	case blackjack.SoftHand:
-		// return
+		return Soft.Get(hand.Total(), dealerCard)
 	}
 
 	return blackjack.Stand
