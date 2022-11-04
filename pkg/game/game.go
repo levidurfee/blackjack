@@ -66,6 +66,8 @@ func Run() {
 				deck.Deal(&player.Hands[handIndex])
 			case blackjack.Double:
 				deck.Deal(&player.Hands[handIndex])
+			case blackjack.Split:
+				// TODO: implement split action
 			}
 		}
 
