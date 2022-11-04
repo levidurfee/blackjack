@@ -75,7 +75,7 @@ func Run() {
 
 		winner := score(&player, &dealer)
 		if winner != nil {
-			fmt.Printf("%s won this hand\n", winner.Name)
+			fmt.Printf("%s won this hand with %d\n", winner.Name, winner.Hands[handIndex].Total())
 		}
 
 		fmt.Println("Another hand? y/n")
