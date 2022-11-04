@@ -36,11 +36,6 @@ func (p Player) String() string {
 		str += "==================================================\n"
 		str += fmt.Sprintf("Name:\t%s\n", p.Name)
 		str += fmt.Sprintf("Score:\t%d\n", p.Score)
-		if p.IsDealer {
-			str += fmt.Sprintf("Total:\t%d\n", hand.DealerTotal())
-			str += fmt.Sprintf("Up:\t%s\n", hand.DealerUpCard())
-			continue
-		}
 		str += fmt.Sprintf("Total:\t%d\n", hand.Total())
 		str += "Cards:\n"
 		for _, card := range hand.Cards {
