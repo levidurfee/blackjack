@@ -71,7 +71,14 @@ func Run() {
 			}
 		}
 
-		// TODO: implement dealer strategy
+		for {
+			printPlayers()
+			if dealer.Hands[handIndex].Total() >= 17 {
+				break
+			}
+
+			deck.Deal(&dealer.Hands[handIndex])
+		}
 
 		winner := score(&player, &dealer)
 		if winner != nil {
