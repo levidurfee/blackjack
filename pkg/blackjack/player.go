@@ -16,7 +16,7 @@ func NewPlayer(name string) Player {
 	return Player{
 		Name:     name,
 		IsDealer: false,
-		Hands:    NewHand(),
+		Hands:    NewHands(),
 		Score:    0,
 	}
 }
@@ -25,7 +25,7 @@ func NewDealer() Player {
 	return Player{
 		Name:     "Dealer",
 		IsDealer: true,
-		Hands:    NewHand(),
+		Hands:    NewHands(),
 		Score:    0,
 	}
 }

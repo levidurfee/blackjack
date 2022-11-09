@@ -24,8 +24,8 @@ func clear() {
 }
 
 func deal() {
-	player.Hands = blackjack.NewHand()
-	dealer.Hands = blackjack.NewHand()
+	player.Hands = blackjack.NewHands()
+	dealer.Hands = blackjack.NewHands()
 
 	deck.Deal(&player.Hands[handIndex])
 	deck.Deal(&dealer.Hands[handIndex])

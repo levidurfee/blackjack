@@ -134,10 +134,14 @@ func (h Hand) Type() HandType {
 	return SoftHand
 }
 
-func NewHand() []Hand {
+func NewHands() []Hand {
 	return []Hand{
-		{
-			Cards: []Card{},
-		},
+		NewHand(),
+	}
+}
+
+func NewHand() Hand {
+	return Hand{
+		Cards: []Card{},
 	}
 }
